@@ -1,0 +1,21 @@
+<div class='details'>
+    <% if ((products.left) != "") { %>
+    <img class="left" src='skin/images/products/<%= products.left %>.png'/>
+    <% } else { %>
+    <img class="left" src='skin/images/products/placeholder.png'/>
+    <% } %>
+    <% if ((products.right) != "") { %>
+    <img class="left" src='skin/images/products/<%= products.right %>.png'/>
+    <% } else { %>
+    <img class="left" src='skin/images/products/placeholder.png'/>
+    <% } %>
+
+    <h1><%= patient_firstname %> <%= patient_lastname %></h1>
+    <span class="location"></span>
+    <div class="topcoat-list__container scroller">
+        <ul class="topcoat-list list actions">
+            <li class="topcoat-list__item"><p>Statut</p><p><%= status %></p><div class="action-icon icon-call"></div></li>
+            <li class="topcoat-list__item"><p>Expiration date</p><p><%= formatdate(date_expires) %></p><div class="action-icon icon-settings"></div></li>
+        </ul>
+    </div>
+</div>

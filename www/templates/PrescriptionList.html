@@ -1,0 +1,27 @@
+<ul class="topcoat-list list">
+<% _.each(prescriptions, function(prescription) { %>
+    <% var statuses = prescription.getStatuses() %>
+    <li class="topcoat-list__item">
+        <% if ((prescription.attributes.products.left) != "") { %>
+            <img src='skin/images/products/<%= prescription.attributes.products.left %>.png'/>
+        <% } else { %>
+            <img src='skin/images/products/placeholder.png'/>
+        <% } %>
+        <% if ((prescription.attributes.products.right) != "") { %>
+            <img src='skin/images/products/<%= prescription.attributes.products.right %>.png'/>
+        <% } else { %>
+            <img src='skin/images/products/placeholder.png'/>
+        <% } %>
+        <a href="#prescription/<%= prescription.attributes.id %>" class="topcoat-button"><%= prescription.attributes.patient_firstname %> <%= prescription.attributes.patient_lastname %></a>
+
+        <span class="topcoat-button--quiet"><%= prescription.attributes.status %></span>
+        <span class="topcoat-button--quiet">Expires: <%= formatdate(prescription.attributes.date_expires) %></span>
+
+        <% if ((prescription.attributes.status) == statuses.active) { %>
+            <span class="topcoat-button--cta add-to-cart" style="float:right" data-prescription="<%= prescription.attributes.id %>" >Add</span>
+        <% } else { %>
+
+        <% } %>
+    </li>
+<% }); %>
+</ul>
