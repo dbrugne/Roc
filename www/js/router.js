@@ -1,4 +1,15 @@
-define(['backbone', 'pageslider'], function(Backbone, PageSlider){
+define([
+  'backbone',
+  'pageslider',
+  'views/Login',
+  'views/Dashboard',
+  'views/Cart',
+
+  'views/Prescription', 'models/Prescription',
+
+  'collections/Cart' // singleton
+], function(Backbone, PageSlider, LoginView, DashboardView, CartView, PrescriptionView, PrescriptionModel, cartCollection){
+
   var slider = new PageSlider($('.main-content'));
 
   return Backbone.Router.extend({
@@ -17,40 +28,32 @@ define(['backbone', 'pageslider'], function(Backbone, PageSlider){
     /* Login */
     login: function () {
       $("body").removeClass('left-nav');
-      require(['views/Login'], function (LoginView) {
-        var loginView = new LoginView();
-        loginView.delegateEvents();
-        slider.slidePage(loginView.$el);
-      });
+      var loginView = new LoginView();
+      loginView.delegateEvents();
+      slider.slidePage(loginView.$el);
     },
     /* Dashboard */
     dashboard: function () {
       $("body").removeClass('left-nav');
-      require(['views/Dashboard'], function (DashboardView) {
-        var dashboardView = new DashboardView();
-        dashboardView.delegateEvents();
-        slider.slidePage(dashboardView.$el);
-      });
+      var dashboardView = new DashboardView();
+      dashboardView.delegateEvents();
+      slider.slidePage(dashboardView.$el);
     },
     /* Cart */
     cart: function () {
       $("body").removeClass('left-nav');
-      require(['views/Cart'], function (CartView) {
-        var cartView = new CartView();
-        cartView.delegateEvents();
-        slider.slidePage(cartView.$el);
-      });
+      var cartView = new CartView({collection: cartCollection});
+      cartView.delegateEvents();
+      slider.slidePage(cartView.$el);
     },
     /* Prescription view */
     prescriptionDetails: function (id) {
       $("body").removeClass('left-nav');
-      require(['views/Prescription', 'models/Prescription'], function (PrescriptionView, PrescriptionModel) {
-        var prescription = new PrescriptionModel({id: id});
-        prescription.fetch({
-          success: function (data) {
-            slider.slidePage(new PrescriptionView({model: data}).$el);
-          }
-        });
+      var prescription = new PrescriptionModel({id: id});
+      prescription.fetch({
+        success: function (data) {
+          slider.slidePage(new PrescriptionView({model: data}).$el);
+        }
       });
     },
     /*

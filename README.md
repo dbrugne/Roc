@@ -15,6 +15,8 @@
 ### Run locally ###
 
 >> grunt serve
+>> cd www/data/rest
+>> json-server prescriptions.json
 
 ### Run remotely on udb connected android ###
 

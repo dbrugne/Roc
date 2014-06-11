@@ -15,5 +15,5 @@ define([
     }
   });
 
-  return new CartCollection;
+  return new CartCollection();
 });

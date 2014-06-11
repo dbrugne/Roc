@@ -3,7 +3,7 @@ define([
   'underscore',
   'backbone',
   'text!tpl/PrescriptionList.html',
-  'collections/cart'
+  'collections/Cart'
 ], function($, _, Backbone, projectListTemplate, CartCollection){
 
   return Backbone.View.extend({
@@ -26,7 +26,7 @@ define([
     addtocart: function (event) {
       var prescriptionId = $(event.target).data('prescription');
       var prescription = this.collection.get(prescriptionId);
-      CartCollection.create(prescription);
+      CartCollection.add(prescription);
       $('#cart-items-count').html(CartCollection.length);
     }
   });
