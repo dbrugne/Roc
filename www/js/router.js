@@ -56,45 +56,5 @@ define([
         }
       });
     },
-    /*
-     *
-     * START : OLD APPLICATION
-     *
-     */
-    /* Home view */
-    home: function () {
-      require(['views/Home'], function (HomeView) {
-        var homeView = new HomeView();
-        homeView.delegateEvents();
-        slider.slidePage(homeView.$el);
-      });
-    },
-    /* Employee view */
-    employeeDetails: function (id) {
-      require(["models/Employee", "views/Employee"], function (EmployeeModel, EmployeeView) {
-        var employee = new EmployeeModel({id: id});
-        employee.fetch({
-          success: function (data) {
-            slider.slidePage(new EmployeeView({model: data}).$el);
-          }
-        });
-      });
-    },
-    /* Reports view */
-    reports: function (id) {
-      require(["models/Employee", "views/Reports"], function (EmployeeModel, ReportsView) {
-        var employee = new EmployeeModel({id: id});
-        employee.fetch({
-          success: function (data) {
-            slider.slidePage(new ReportsView({model: data}).$el);
-          }
-        });
-      });
-    }
-    /*
-     *
-     * END : OLD APPLICATION
-     *
-     */
   })
 });
